@@ -33,7 +33,7 @@ if dataWeeksReturned.shape[0] == rowsOfData:
     for entry in dObject:
         entry['symbol'] = stockSymbol
         entry['username'] = userName
-        entry['date'] = dataDatesReturned[i]
+        entry['date'] = str(dataDatesReturned[i])
         i += 1
 
     pprint(dataWeeksReturned)
