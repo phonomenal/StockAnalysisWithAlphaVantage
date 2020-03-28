@@ -8,8 +8,7 @@ import AzureCosmoDB_Insert
 userName = 'jameha'
 
 #stock symbol
-
-stockSymbol = 'GOOG'
+stockSymbol = 'MSFT'
 
 #Number of rows you want returned from the query
 rowsOfData = 25
@@ -22,35 +21,28 @@ elif rowsOfData < 100:
 
 dataWeeksReturned = data.head(rowsOfData)
 
-if dataWeeksReturned.shape[0] == rowsOfData:
+#retrieving the dates filtered from the weeks returned
+dataDatesReturned = dataWeeksReturned._stat_axis.date
 
-    #retrieving the dates filtered from the weeks returned
-    dataDatesReturned = dataWeeksReturned._stat_axis.date
+#Convets Panda Data Frame to dictionary object
+dataObjectReturned = dataWeeksReturned.to_dict(orient='records')
 
-    #Convets Panda Data Frame to dictionary object
-    dataObjectReturned = dataWeeksReturned.to_dict(orient='records')
+i = 0
+for entry in dataObjectReturned:
+    entry['1_open'] = entry.pop('1. open')
+    entry['2_high'] = entry.pop('2. high')
+    entry['3_low'] = entry.pop('3. low')
+    entry['4_close'] = entry.pop('4. close')
+    entry['5_volume'] = entry.pop('5. volume')
+    entry['symbol'] = stockSymbol
+    entry['username'] = userName
+    entry['date'] = str(dataDatesReturned[i])
+    i += 1
 
-    i = 0
-    for entry in dataObjectReturned:
-        entry['1_open'] = entry.pop('1. open')
-        entry['2_high'] = entry.pop('2. high')
-        entry['3_low'] = entry.pop('3. low')
-        entry['4_close'] = entry.pop('4. close')
-        entry['5_volume'] = entry.pop('5. volume')
-        entry['symbol'] = stockSymbol
-        entry['username'] = userName
-        entry['date'] = str(dataDatesReturned[i])
-        i += 1
+pprint(dataWeeksReturned)
 
-    pprint(dataWeeksReturned)
-    print(dataObjectReturned)
+#Insert results to Cosmos DB
+AzCosmos = AzureCosmoDB_Insert.AzureCosmosCRUD(dataObjectReturned)
+AzCosmos.insertDataToMongo()
 
-    #Insert results to Cosmos DB
-
-    AzCosmos = AzureCosmoDB_Insert.AzureCosmosCRUD(dataObjectReturned)
-
-    AzCosmos.insertDataToMongo()
-
-else:
-    print("Rows of data requested did not match what was returned, /n Ensure you are using either compact or full outputsizes /n Exiting")
-    exit()
+print("Insert to Azure Cosmos DB successful. Number of documents added:" + len(dataObjectReturned))
