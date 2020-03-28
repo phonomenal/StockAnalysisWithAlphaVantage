@@ -9,7 +9,7 @@ userName = 'jameha'
 
 #stock symbol
 
-stockSymbol = 'AMD'
+stockSymbol = 'GOOG'
 
 #Number of rows you want returned from the query
 rowsOfData = 25
