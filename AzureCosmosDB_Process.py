@@ -34,6 +34,8 @@ results_MinHigh = results_List[0]
 
 print("The max high price during this time frame was on: " + result_MaxHigh['date'])
 print("At the price of: " + str(result_MaxHigh['2_high']))
+print("With a volume of: " + str(result_MaxHigh['5_volume']))
 
 print("The min high price during this time frame was on: " + results_MinHigh['date'])
 print("At the price of: " + str(results_MinHigh['2_high']))
+print("With a volume of: " + str(results_MinHigh['5_volume']))

@@ -19,4 +19,13 @@ class AzureCosmosCRUD() :
 
     def insertDataToMongo(self):
         
-        x = mycol.insert_many(self.dataObjectReturned)
+        mycol.insert_many(self.dataObjectReturned)
+
+    #not sure how to update many properly when there are dupe entries in the database
+    def updateDataToMongo(self):
+        
+        latestDate = self.dataObjectReturned[0]
+        latestDate['date']
+
+        mycol.update_many(filter=({'date': {'$lt': latestDate}}), update={'$set':self.dataObjectReturned}, upsert=True)    
+    
