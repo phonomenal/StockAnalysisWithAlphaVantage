@@ -16,16 +16,25 @@ techIndicators_RSI = av_API.techIndicator_get_RSI(rsi_TimePeriod)
 techIndicators_MCAD = av_API.techIndicator_get_MACD()
 
 #Run VWAP, time interval set in minutes
-vwap_TimeInterval = '15min'
+vwap_TimeInterval = '60min'
 techIndicators_VWAP = av_API.techIndicator_get_VWAP(vwap_TimeInterval)
+#Get lastest VWAP entries
+num_ReturnedVWAP = 50
+results_LastDays = techIndicators_VWAP[0].tail(num_ReturnedVWAP)
+
+#Run VWAP, time interval set in minutes
+obv_TimePeriod = 'daily'
+techIndicators_OBV = av_API.techIndicator_get_OBV(obv_TimePeriod)
 
 #Print Results of each method for a date list
 result_Date=['2020-03-27','2020-03-26','2020-03-25']
+
 
 for date in result_Date:
     print("Technical Indicators for: " + symbol + " on date: " + date)
     print(techIndicators_bbands[0][date])
     print(techIndicators_RSI[0][date])
     print(techIndicators_MCAD[0][date])
-    for vwap_Interval in techIndicators_VWAP:
-        print(vwap_Interval)
+    print(techIndicators_OBV[0][date])
+    print("VWAP:" + results_LastDays) 
+
