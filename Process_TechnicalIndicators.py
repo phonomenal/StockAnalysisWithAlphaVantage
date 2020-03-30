@@ -15,4 +15,10 @@ techIndicators_RSI = av_API.techIndicator_get_RSI(rsi_TimePeriod)
 #Run MCAD method
 techIndicators_MCAD = av_API.techIndicator_get_MACD()
 
-x = 69
+result_Date=['2020-03-27','2020-03-26','2020-03-25']
+
+for date in result_Date:
+    print("Technical Indicators for: " + symbol + " on date: " + date)
+    print(techIndicators_bbands[0][date])
+    print(techIndicators_RSI[0][date])
+    print(techIndicators_MCAD[0][date])
