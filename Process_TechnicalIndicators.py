@@ -8,8 +8,11 @@ av_API = AlphaVantageAPI(symbol)
 bbands_TimePeriod = 60
 techIndicators_bbands = av_API.techIndicator_get_bbands(bbands_TimePeriod)
 
-#Run RSI methods, returning array of data and metadata of the request  
+#Run RSI method, returning array of data and metadata of the request  
 rsi_TimePeriod = 60
 techIndicators_RSI = av_API.techIndicator_get_RSI(rsi_TimePeriod)
+
+#Run MCAD method
+techIndicators_MCAD = av_API.techIndicator_get_MACD()
 
 x = 69

@@ -17,3 +17,8 @@ class AlphaVantageAPI() :
         ti = TechIndicators(key= settings.API_KEY, output_format='json')
         data, meta_data = ti.get_rsi(symbol=self.symbol, interval='daily', time_period=timePeriod)
         return data, meta_data
+
+    def techIndicator_get_MACD(self):
+        ti = TechIndicators(key= settings.API_KEY, output_format='json')
+        data, meta_data = ti.get_macd(symbol=self.symbol, interval='daily', series_type='close')
+        return data, meta_data
