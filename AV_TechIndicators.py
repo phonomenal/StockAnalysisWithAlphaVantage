@@ -13,8 +13,8 @@ class AlphaVantageAPI() :
         data, meta_data = ti.get_bbands(symbol=self.symbol, interval='daily', time_period=timePeriod)
         return data, meta_data
     
-    def techIndicator_get_RSI(self, timePeriod):
-        ti = TechIndicators(key= settings.API_KEY, output_format='json')
+    def techIndicator_get_RSI(self, timePeriod, format):
+        ti = TechIndicators(key= settings.API_KEY, output_format=format)
         data, meta_data = ti.get_rsi(symbol=self.symbol, interval='daily', time_period=timePeriod)
         return data, meta_data
 
