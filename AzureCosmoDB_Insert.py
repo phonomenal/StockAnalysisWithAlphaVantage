@@ -11,7 +11,7 @@ uri = settings.DB_CONNECTION_STRING
 client = pymongo.MongoClient(uri)
 
 mydb = client["AlphaVantageDataBase"]
-mycol = mydb["AlphaVantageLists"]
+mycol = mydb["RSI"]
 
 class AzureCosmosCRUD() :
     

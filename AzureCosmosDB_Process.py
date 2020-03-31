@@ -10,7 +10,7 @@ uri = settings.DB_CONNECTION_STRING
 client = pymongo.MongoClient(uri)
 
 mydb = client["AlphaVantageDataBase"]
-mycol = mydb["AlphaVantageLists"]
+mycol = mydb["RSI"]
 
 #query we pass to mongodb
 query_GetUserStockGtDate = { "username": "jameha", "symbol":"AMD", "date": { "$gt" : "2020-03-03"} }
