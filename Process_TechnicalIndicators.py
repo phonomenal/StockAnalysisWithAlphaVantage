@@ -17,10 +17,24 @@ techIndicators_MCAD = av_API.techIndicator_get_MACD()
 
 #Run VWAP, time interval set in minutes
 vwap_TimeInterval = '60min'
-techIndicators_VWAP = av_API.techIndicator_get_VWAP(vwap_TimeInterval)
-#Get lastest VWAP entries
-num_ReturnedVWAP = 50
-results_LastDays = techIndicators_VWAP[0].tail(num_ReturnedVWAP)
+vwap_DataFormat = 'pandas'
+techIndicators_VWAP = av_API.techIndicator_get_VWAP(vwap_TimeInterval, vwap_DataFormat)
+if vwap_DataFormat == 'pandas':
+    #Get lastest VWAP entries
+    techIndicators_VWAP = techIndicators_VWAP[0]
+
+#testing parsing to dict, orienting records
+vwap_DictObject = techIndicators_VWAP.to_dict(orient='records')
+vwap_DatesParsed = techIndicators_VWAP._stat_axis._data
+
+print(techIndicators_VWAP) 
+
+#Dict object appeneded with symbol and datetime
+i = 0
+for entry in vwap_DictObject:
+    entry['symbol'] = symbol
+    entry['date'] = str(vwap_DatesParsed[i])
+    i += 1
 
 #Run VWAP, time interval set in minutes
 obv_TimePeriod = 'daily'
@@ -36,5 +50,7 @@ for date in result_Date:
     print(techIndicators_RSI[0][date])
     print(techIndicators_MCAD[0][date])
     print(techIndicators_OBV[0][date])
-    print("VWAP:" + results_LastDays) 
+
+
+print(techIndicators_VWAP[0]) 
 
