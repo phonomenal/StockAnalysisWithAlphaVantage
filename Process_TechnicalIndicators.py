@@ -6,6 +6,13 @@ symbol = 'MSFT'
 av_API = AlphaVantageAPI(symbol)
 df_Obj = DataFormatter(symbol)
 
+#Run OBV, time interval set in minutes
+obv_TimePeriod = 'daily'
+obv_DataFormat = 'pandas'
+techIndicators_OBV = av_API.techIndicator_get_OBV(obv_TimePeriod, obv_DataFormat)
+if type(techIndicators_OBV) == tuple:
+    obv_DictObjForInsert = df_Obj.format_DataFrameToDict(techIndicators_OBV)
+
 
 #Run MCAD method
 mcad_DataFormat = 'pandas'
@@ -41,12 +48,6 @@ techIndicators_bbands = av_API.techIndicator_get_bbands(bbands_TimePeriod, bband
 if type(techIndicators_VWAP) == tuple:
     bbands_DictObjForInsert = df_Obj.format_DataFrameToDict(techIndicators_bbands)
 
-
-
-
-#Run OBV, time interval set in minutes
-obv_TimePeriod = 'daily'
-techIndicators_OBV = av_API.techIndicator_get_OBV(obv_TimePeriod)
 
 #Print Results of each method for a date list
 result_Date=['2020-03-27','2020-03-26','2020-03-25']
