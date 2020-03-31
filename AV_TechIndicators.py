@@ -18,9 +18,9 @@ class AlphaVantageAPI() :
         data, meta_data = ti.get_rsi(symbol=self.symbol, interval='daily', time_period=timePeriod)
         return data, meta_data
 
-    def techIndicator_get_MACD(self):
-        ti = TechIndicators(key= settings.API_KEY, output_format='json')
-        data, meta_data = ti.get_macd(symbol=self.symbol, interval='daily', series_type='close')
+    def techIndicator_get_MACD(self, format, macd_interval, series):
+        ti = TechIndicators(key= settings.API_KEY, output_format=format)
+        data, meta_data = ti.get_macd(symbol=self.symbol, interval=macd_interval, series_type=series)
         return data, meta_data
 
     def techIndicator_get_VWAP(self, timePeriod,format):

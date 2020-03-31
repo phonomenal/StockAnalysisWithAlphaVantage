@@ -8,7 +8,13 @@ df_Obj = DataFormatter(symbol)
 
 
 #Run MCAD method
-techIndicators_MCAD = av_API.techIndicator_get_MACD()
+mcad_DataFormat = 'pandas'
+mcad_Interval = 'daily'
+mcad_Series = 'close'
+techIndicators_MCAD = av_API.techIndicator_get_MACD(mcad_DataFormat, mcad_Interval, mcad_Series)
+if type(techIndicators_MCAD) == tuple:
+    mcad_DictObjForInsert = df_Obj.format_DataFrameToDict(techIndicators_MCAD)
+
 
 #Run RSI method, returning array of data and metadata of the request  
 rsi_TimePeriod = 60
