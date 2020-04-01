@@ -54,7 +54,13 @@ vwap_DataFormat = 'pandas'
 techIndicators_VWAP = av_API.techIndicator_get_VWAP(vwap_TimeInterval, vwap_DataFormat)
 #Process returned dataframe to a dict object for insert method to db
 if type(techIndicators_VWAP) == tuple:
-    vwap_DictObjForInsert = df_Obj.format_DataFrameToDict(techIndicators_VWAP)
+    vwap_DictObj = df_Obj.format_DataFrameToDict(techIndicators_VWAP)
+    if timeIntervalResults == 'Annual':
+        if len(vwap_DictObj) < 500:
+            vwap_DictObjForInsert = vwap_DictObj
+    if insertResultsToDB == True:
+        az_DB = AzureCosmosCRUD(vwap_DictObjForInsert)
+        az_DB.insertDataToMongo()
 
 #Run BBANDS method, returning array of data and metadata of the request
 bbands_TimePeriod = 60
