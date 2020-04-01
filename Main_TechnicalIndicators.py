@@ -57,7 +57,7 @@ if type(techIndicators_VWAP) == tuple:
     vwap_DictObj = df_Obj.format_DataFrameToDict(techIndicators_VWAP)
     if timeIntervalResults == 'Annual':
         if len(vwap_DictObj) < 500:
-            vwap_DictObjForInsert = vwap_DictObj
+            vwap_DictObjForInsert = vwap_DictObj[:499]
     if insertResultsToDB == True:
         az_DB = AzureCosmosCRUD(vwap_DictObjForInsert)
         az_DB.insertDataToMongo()
@@ -67,7 +67,10 @@ bbands_TimePeriod = 60
 bbands_DataFormat = 'pandas'
 techIndicators_bbands = av_API.techIndicator_get_bbands(bbands_TimePeriod, bbands_DataFormat)
 if type(techIndicators_VWAP) == tuple:
-    bbands_DictObjForInsert = df_Obj.format_DataFrameToDict(techIndicators_bbands)
-
-#Process and Send formatted dict obj data to DB
+    bbands_DictObj = df_Obj.format_DataFrameToDict(techIndicators_bbands)
+    if timeIntervalResults == 'Annual':
+        vwap_DictObjForInsert = bbands_DictObj[:265]
+    if insertResultsToDB == True:
+        az_DB = AzureCosmosCRUD(vwap_DictObjForInsert)
+        az_DB.insertDataToMongo()
 
