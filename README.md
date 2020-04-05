@@ -38,6 +38,10 @@ To install the azure cosmos package use:
 ```shell
 pip install azure-cosmos
 ```
+To install the pymongo package use:
+```shell
+pip install pymongo
+```
 
 ## Setup
 View the Environment_Settings folder, you will find a *.env_sample* file. 
