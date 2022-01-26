@@ -1,5 +1,7 @@
 # Python Stock Analyzer with MongoDB
 
+[![Git](https://app.soluble.cloud/api/v1/public/badges/33d565d4-196d-435f-9861-4b6d7fe2a495.svg?orgId=650162616495)](https://app.soluble.cloud/repos/details/github.com/james-leha/stockanalysiswithalphavantage?orgId=650162616495)  
+
 *Python solution using the Alpha Vantage free stock API and Azure Cosmos MongoDB API for data storage*
 
 Alpha Vantage delivers a free API for real time financial data and most used finance indicators in a simple json or pandas format. This module implements a python interface to the free API provided by Alpha
